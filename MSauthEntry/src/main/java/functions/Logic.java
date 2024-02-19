@@ -85,6 +85,7 @@ public class Logic implements HttpFunction {
 		this.response = response;
 		mgm.setThreadCpuTimeEnabled(true);
 		this.startCpuTime=mgm.getCurrentThreadCpuTime();
+		this.startExecTime=System.nanoTime();
 		
 		//execute the entry activity
 		MSauthEntry_A1();
