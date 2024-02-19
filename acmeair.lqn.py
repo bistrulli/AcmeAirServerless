@@ -3,6 +3,8 @@ sys.path.append('/Users/emilio-imt/git/MPP4Lqn')
 
 from entity import *
 from Lqn2MPP import Lqn2MPP
+import numpy as np
+import estimeDemands
 		
 if __name__ == '__main__':
 	
@@ -302,9 +304,17 @@ if __name__ == '__main__':
 	
 	LQN={"tasks":[T_clientEntry ,T_MSauthEntry,T_MSvalidateidEntry,T_MSviewprofileEntry,T_MSupdateprofileEntry,T_MSupdateMilesEntry,T_MSbookflightsEntry,T_MScancelbookingEntry,T_MSqueryflightsEntry,T_MSgetrewardmilesEntry], "name":"acmeair.lqn"}
 	lqn2mpp.getMPP(lqn=LQN)
+	
+	#if log exist recalibrate the LQN based on executions logs
+	con=lqn2mpp.getConGraph()
+	np.savez('con.txt', **con)
+	estimeDemands.estimeDeaand(lqn=LQN,con=con)
+	
 	#lqn2mpp.removeInfSynch()
 	#lqn2mpp.removeInfAsynch()
 	#lqn2mpp.removeInfAcquire()
-	lqn2mpp.toMatlab(outDir="./")
+	
+	
+	#lqn2mpp.toMatlab(outDir="./")
 	#lqn2mpp.toLqns(outDir="model",LQN=LQN)
 	

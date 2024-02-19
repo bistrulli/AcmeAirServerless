@@ -30,6 +30,8 @@ public class Logic implements HttpFunction {
 	private HashMap<String, Boolean> act_exec=new HashMap<String, Boolean>();
 	private HashMap<String, Thread> act_thread=new HashMap<String, Thread>();
 	private Long  startCpuTime=null;
+	private Long  startExecTime=null;
+	
 
 	/*
 	 * activities
@@ -123,7 +125,8 @@ public class Logic implements HttpFunction {
 		  this.act_exec.put("MScancelbookingEntry_A3",false);
 		  ReplyNode_MScancelbookingEntry_A3();
 		}
-		Logic.logger.info("time:="+String.valueOf(mgm.getCurrentThreadCpuTime()-this.startCpuTime));
+		String logstring=String.format("cpu:=%d  rt:=%d",String.valueOf(mgm.getCurrentThreadCpuTime()-this.startCpuTime),String.valueOf(System.nanoTime()-this.startExecTime));
+		Logic.logger.info("time:="+logstring);
 	}
 
 	private void doWork(Double stime) {

@@ -10,5 +10,5 @@ gcloud beta functions deploy MSqueryflightsEntry \
 --trigger-http \
 --allow-unauthenticated \
 --project modellearning \
---max-instances=50 \
+--max-instances=100 \
 --min-instances=1
