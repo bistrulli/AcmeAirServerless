@@ -182,8 +182,9 @@ public class Logic implements HttpFunction {
 		  this.act_exec.put("MSbookflightsEntry_A5",false);
 		  ReplyNode_MSbookflightsEntry_A5();
 		}
-		String logstring=String.format("cpu:=%d  rt:=%d",String.valueOf(mgm.getCurrentThreadCpuTime()-this.startCpuTime),String.valueOf(System.nanoTime()-this.startExecTime));
-		Logic.logger.info("time:="+logstring);
+		String logstring=String.format("cpu:=%d  rt:=%d",mgm.getCurrentThreadCpuTime()-this.startCpuTime,
+									   System.nanoTime()-this.startExecTime);
+		Logic.logger.info(logstring);
 	}
 
 	private void doWork(Double stime) {
