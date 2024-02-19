@@ -30,37 +30,37 @@ class SimpleWorkload(HttpUser):
 		self.doWait(1.0E-5);
 
 		tgt_url = "MSviewprofileEntry";
-		self.client.get(tgt_url)
+		self.client.get(tgt_url.lower())
 	def clientEntry_A2(self):
 		self.act_exec["clientEntry_A2"]=True;
 		self.doWait(1.0E-5);
 
 		tgt_url = "MSupdateprofileEntry";
-		self.client.get(tgt_url)
+		self.client.get(tgt_url.lower())
 	def clientEntry_A3(self):
 		self.act_exec["clientEntry_A3"]=True;
 		self.doWait(1.0E-5);
 
 		tgt_url = "MSbookflightsEntry";
-		self.client.get(tgt_url)
+		self.client.get(tgt_url.lower())
 	def clientEntry_A4(self):
 		self.act_exec["clientEntry_A4"]=True;
 		self.doWait(1.0E-5);
 
 		tgt_url = "MScancelbookingEntry";
-		self.client.get(tgt_url)
+		self.client.get(tgt_url.lower())
 	def clientEntry_A5(self):
 		self.act_exec["clientEntry_A5"]=True;
 		self.doWait(1.0E-5);
 
 		tgt_url = "MSqueryflightsEntry";
-		self.client.get(tgt_url)
+		self.client.get(tgt_url.lower())
 	def clientEntry_A6(self):
 		self.act_exec["clientEntry_A6"]=True;
 		self.doWait(1.0E-5);
 
 		tgt_url = "MSauthEntry";
-		self.client.get(tgt_url)
+		self.client.get(tgt_url.lower())
 	def clientEntry_A7(self):
 		self.act_exec["clientEntry_A7"]=True;
 		self.doWait(0.2);
