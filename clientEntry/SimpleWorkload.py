@@ -3,14 +3,13 @@ import queue, time, logging
 import locust.stats
 import numpy as np
 import subprocess
-from locust.stats import StatsCSVFileWriter
 
 locust.stats.CSV_STATS_INTERVAL_SEC = 1
 
 
-# @events.test_stop.add_listener
-# def on_test_stop(**kw):
-# 	pass
+@events.test_stop.add_listener
+def on_test_stop(**kw):
+	pass
 
 
 class SimpleWorkload(HttpUser):
@@ -161,31 +160,5 @@ class SimpleWorkload(HttpUser):
 		
 
 if __name__ == "__main__":
-	# Define output file path
-    output_file = "locust_results.csv"
-
-    # Create StatsCSVFileWriter instance
-    stats_writer = StatsCSVFileWriter(
-        file_path=output_file,
-        stats=[
-            "total_requests",
-            "fail_ratio",
-            "min_response_time",
-            "max_response_time",
-            "median_response_time",
-            "avg_response_time",
-            "current_rps"
-        ],
-        ignore_non_aggregate=False  # Only write aggregate data
-    )
-
-    # Register the stats writer
-    env = Environment(user_classes=[SimpleWorkload])
-    env.stats_listeners.append(stats_writer)
-
-    # Run Locust in headless mode
-    env.run(headless=True)
-
-    # Stats are now saved to the specified CSV file
-	#SimpleWorkload().run()
+	SimpleWorkload().run()
 	
