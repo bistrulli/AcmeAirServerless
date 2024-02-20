@@ -308,13 +308,18 @@ if __name__ == '__main__':
 	#if log exist recalibrate the LQN based on executions logs
 	con=lqn2mpp.getConGraph()
 	np.savez('con.txt', **con)
-	estimeDemands.estimeDeaand(lqn=LQN,con=con)
+	demands=estimeDemands.estimeDeaand(lqn=LQN,con=con)
 	
-	#lqn2mpp.removeInfSynch()
-	#lqn2mpp.removeInfAsynch()
+
+	#calibrate model
+	for t in LQN["tasks"]:
+		for e in t.getEntries():
+			acts=[a for a in e.getActivities() if(type(a) is  Activity)]
+			acts[0].stime=demands[e.name]
+			
+	lqn2mpp.removeInfSynch()
+	lqn2mpp.removeInfAsynch()
 	#lqn2mpp.removeInfAcquire()
-	
-	
-	#lqn2mpp.toMatlab(outDir="./")
+	lqn2mpp.toMatlab(outDir="./")
 	#lqn2mpp.toLqns(outDir="model",LQN=LQN)
 	
