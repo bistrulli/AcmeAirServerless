@@ -176,7 +176,7 @@ if __name__ == "__main__":
             "avg_response_time",
             "current_rps"
         ],
-        ignore_non_aggregate=True  # Only write aggregate data
+        ignore_non_aggregate=False  # Only write aggregate data
     )
 
     # Register the stats writer
