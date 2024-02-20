@@ -184,7 +184,7 @@ if __name__ == "__main__":
     env.stats_listeners.append(stats_writer)
 
     # Run Locust in headless mode
-    env.run()
+    env.run(headless=True)
 
     # Stats are now saved to the specified CSV file
 	#SimpleWorkload().run()
