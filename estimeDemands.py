@@ -15,8 +15,9 @@ def estimeDeaand(lqn=None,con=None):
             for  e in t.getEntries():
                 print(f"calibrating {e.name}")
                 #get rt of this function
-                df=pd.read_csv(f"./logs/{e.name}.csv",names=["A","B","C","D","Time"],delim_whitespace=True)
-                df["Time"]=df["Time"].apply(lambda x:float(re.findall("\d+",x)[0])*1e-9)
+                df=pd.read_csv(f"./logs/{e.name}.csv",names=["A","B","C","D","cpu","rt"],delim_whitespace=True)
+                df["rt"]=df["rt"].apply(lambda x:float(re.findall("\d+",x)[0])*1e-9)
+                df["cpu"]=df["cpu"].apply(lambda x:float(re.findall("\d+",x)[0])*1e-9)
                 
                 #get rt of called function
                 eidx=con["idx"].tolist().index(e.name)
@@ -29,10 +30,12 @@ def estimeDeaand(lqn=None,con=None):
                         print(f"{val}x{e.name}->{dname}")
                         
                         #get rt of nested functions
-                        df_nested=pd.read_csv(f"./logs/{dname}.csv",names=["A","B","C","D","Time"],delim_whitespace=True)
-                        df_nested["Time"]=df_nested["Time"].apply(lambda x:float(re.findall("\d+",x)[0])*1e-9)
-                        nestedTime+=val*df_nested["Time"].mean()
+                        df_nested=pd.read_csv(f"./logs/{dname}.csv",names=["A","B","C","D","cpu","rt"],delim_whitespace=True)
+                        df_nested["rt"]=df_nested["rt"].apply(lambda x:float(re.findall("\d+",x)[0])*1e-9)
+                        nestedTime+=val*df_nested["rt"].mean()
                 
-                print(df["Time"].mean(),nestedTime)
-                
+                #if(np.sum(calledEntry)>0):
+                print("\t",df["rt"].mean()-nestedTime)
+                #else:
+                    #print("\t",df["cpu"].mean(),df["rt"].mean()-nestedTime)
                 
