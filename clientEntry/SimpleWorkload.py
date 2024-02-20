@@ -8,9 +8,9 @@ from locust.stats import StatsCSVFileWriter
 locust.stats.CSV_STATS_INTERVAL_SEC = 1
 
 
-@events.test_stop.add_listener
-def on_test_stop(**kw):
-	pass
+# @events.test_stop.add_listener
+# def on_test_stop(**kw):
+# 	pass
 
 
 class SimpleWorkload(HttpUser):
