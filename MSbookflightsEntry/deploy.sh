@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MSbookflightsEntry \
+gcloud beta functions deploy msbookflightsentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \

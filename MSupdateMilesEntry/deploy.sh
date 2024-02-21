@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MSupdateMilesEntry \
+gcloud beta functions deploy msupdatemilesentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \

@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MSauthEntry \
+gcloud beta functions deploy msauthentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \

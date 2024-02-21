@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MSqueryflightsEntry \
+gcloud beta functions deploy msqueryflightsentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \

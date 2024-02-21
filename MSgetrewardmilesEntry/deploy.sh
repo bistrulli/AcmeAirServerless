@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MSgetrewardmilesEntry \
+gcloud beta functions deploy msgetrewardmilesentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \

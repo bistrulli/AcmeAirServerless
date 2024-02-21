@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MSvalidateidEntry \
+gcloud beta functions deploy msvalidateidentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \

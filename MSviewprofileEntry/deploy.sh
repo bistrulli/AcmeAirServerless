@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MSviewprofileEntry \
+gcloud beta functions deploy msviewprofileentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \

@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MSupdateprofileEntry \
+gcloud beta functions deploy msupdateprofileentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \

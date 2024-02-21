@@ -1,5 +1,5 @@
 #! /bin/sh
-gcloud beta functions deploy MScancelbookingEntry \
+gcloud beta functions deploy mscancelbookingentry \
 --gen2 \
 --runtime=java17 \
 --region=northamerica-northeast1 \
