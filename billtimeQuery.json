@@ -1,0 +1,3 @@
+{
+  "query": "fetch cloud_run_revision\n| metric 'run.googleapis.com/container/billable_instance_time'\n| filter\n    resource.project_id == 'modellearning'\n    &&\n    (resource.location == 'northamerica-northeast1'\n     && resource.service_name =~ 'ms.*entry')\n| within 3d\n| align rate(1m)\n| every 1m\n| group_by [],\n    [value_billable_instance_time_aggregate:\n       aggregate(value.billable_instance_time)]"
+}

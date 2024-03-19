@@ -1,0 +1,10 @@
+name,ncopt,ntopt
+MSauthEntry,0.049524,2
+MSvalidateidEntry,0.007423,2
+MSviewprofileEntry,0.017588,2
+MSupdateprofileEntry,0.015211,2
+MSupdateMilesEntry,0.085203,2
+MSbookflightsEntry,0.014494,32
+MScancelbookingEntry,0.009233,26
+MSqueryflightsEntry,0.019244,2
+MSgetrewardmilesEntry,0.586493,2

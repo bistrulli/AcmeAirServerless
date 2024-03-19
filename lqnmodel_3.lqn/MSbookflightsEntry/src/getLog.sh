@@ -1,0 +1,1 @@
+gcloud functions logs read msauthentry  --gen2 --project=modellearning --region=northamerica-northeast1  --limit=200 | grep time:=
