@@ -62,20 +62,26 @@ def main():
         wlesscon_end=expdf[(expdf["modelname"]==m) & (expdf["exptype"]=="wlessend") & (expdf["action"]=="end")]["time"].iloc[0]
 
 
-        defcond_start_date=datetime.fromtimestamp(defcond_start, tz=utc)-timedelta(days=0, hours=0, minutes=2)
-        defcond_end_date=datetime.fromtimestamp(defcond_end, tz=utc)+timedelta(days=0, hours=0, minutes=4)
+        defcond_start_date=datetime.fromtimestamp(defcond_start, tz=utc)-timedelta(days=0, hours=0, minutes=0)
+        defcond_end_date=datetime.fromtimestamp(defcond_end, tz=utc)+timedelta(days=0, hours=0, minutes=2)
 
-        nocon_start_date=datetime.fromtimestamp(nocon_start, tz=utc)-timedelta(days=0, hours=0, minutes=2)
-        nocon_end_date=datetime.fromtimestamp(nocon_end, tz=utc)+timedelta(days=0, hours=0, minutes=4)
+        nocon_start_date=datetime.fromtimestamp(nocon_start, tz=utc)-timedelta(days=0, hours=0, minutes=0)
+        nocon_end_date=datetime.fromtimestamp(nocon_end, tz=utc)+timedelta(days=0, hours=0, minutes=0)
 
-        wlesscon_start_date=datetime.fromtimestamp(wlesscon_start, tz=utc)-timedelta(days=0, hours=0, minutes=2)
-        wlesscon_end_date=datetime.fromtimestamp(wlesscon_end, tz=utc)+timedelta(days=0, hours=0, minutes=4)
+        wlesscon_start_date=datetime.fromtimestamp(wlesscon_start, tz=utc)-timedelta(days=0, hours=0, minutes=0)
+        wlesscon_end_date=datetime.fromtimestamp(wlesscon_end, tz=utc)+timedelta(days=0, hours=0, minutes=2)
 
-        print(defcond_start_date,wlesscon_end_date)
+        #print(defcond_start_date,wlesscon_end_date)
 
         defbill+=[np.trapz(df_bill[(df_bill["time"]>=defcond_start_date) & (df_bill["time"]<=defcond_end_date)]["values"].to_numpy())]
         noconcbill+=[np.trapz(df_bill[(df_bill["time"]>=nocon_start_date) & (df_bill["time"]<=nocon_end_date)]["values"].to_numpy())]
         wlessbill+=[np.trapz(df_bill[(df_bill["time"]>=wlesscon_start_date) & (df_bill["time"]<=wlesscon_end_date)]["values"].to_numpy())]
+
+        print(m,"\t",defcond_start_date.isoformat(),
+                "\t",defcond_end_date.isoformat(),
+                "\t",wlesscon_start_date.isoformat(),
+                "\t",wlesscon_end_date.isoformat(),
+                "\t",(defconcRt[-1]-wlessRt[-1])*100/wlessRt[-1])
     
     # plt.figure()
     # plt.boxplot(defconcRt,positions=[1])
@@ -113,6 +119,7 @@ def main():
 
     savemat("wless.mat",{"defconcRt":defconcRt,"noconcRt":noconcRt,"wlessRt":wlessRt,
                         "defbill":defbill,"noconcbill":noconcbill,"wlessbill":wlessbill,"optCon":allOptCon})
+
 
     # ratio1=np.divide((defconcRt-wlessRt),wlessRt)*100
     # ratio2=np.divide((noconcRt-wlessRt),wlessRt)*100

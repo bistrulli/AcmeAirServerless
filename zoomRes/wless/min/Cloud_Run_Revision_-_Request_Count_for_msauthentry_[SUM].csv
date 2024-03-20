@@ -1,0 +1,16 @@
+TimeSeries ID,request_count.cloud_run_revision.ALIGN_RATE.REDUCE_SUM.metric.type="run.googleapis.com/request_count" resource.type="cloud_run_revision" resource.label."service_name"="msauthentry".60s.project_id:modellearning
+project_id,modellearning
+Thu Mar 14 2024 19:03:00 GMT+0100 (Ora standard dell’Europa centrale),0.016666666666666666
+Thu Mar 14 2024 19:04:00 GMT+0100 (Ora standard dell’Europa centrale),0.36666666666666664
+Thu Mar 14 2024 19:05:00 GMT+0100 (Ora standard dell’Europa centrale),19.216666666666665
+Thu Mar 14 2024 19:06:00 GMT+0100 (Ora standard dell’Europa centrale),49.35
+Thu Mar 14 2024 19:07:00 GMT+0100 (Ora standard dell’Europa centrale),82.48333333333333
+Thu Mar 14 2024 19:08:00 GMT+0100 (Ora standard dell’Europa centrale),118.38333333333334
+Thu Mar 14 2024 19:09:00 GMT+0100 (Ora standard dell’Europa centrale),140.75
+Thu Mar 14 2024 19:10:00 GMT+0100 (Ora standard dell’Europa centrale),115.11666666666666
+Thu Mar 14 2024 19:11:00 GMT+0100 (Ora standard dell’Europa centrale),78.86666666666666
+Thu Mar 14 2024 19:12:00 GMT+0100 (Ora standard dell’Europa centrale),42.25
+Thu Mar 14 2024 19:13:00 GMT+0100 (Ora standard dell’Europa centrale),26.083333333333332
+Thu Mar 14 2024 19:14:00 GMT+0100 (Ora standard dell’Europa centrale),41.31666666666667
+Thu Mar 14 2024 19:15:00 GMT+0100 (Ora standard dell’Europa centrale),4.933333333333334
+Thu Mar 14 2024 19:16:00 GMT+0100 (Ora standard dell’Europa centrale),0

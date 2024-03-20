@@ -1,9 +1,0 @@
-clear
-res=load("../wless.mat");
-
-figure('units','normalized','outerposition',[0 0 1 1])
-box on
-grid on
-scatter((res.defconcRt-res.wlessRt)./res.wlessRt*100,(res.defbill-res.wlessbill)./res.wlessbill*100)
-fontsize(gcf,24,"pixels")
-xlabel(95th E2E Response Time )
