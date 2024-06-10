@@ -1,0 +1,89 @@
+# This block is supported for backward compatibility
+# but it is not used by DiffLQN
+G
+"simple-qn.lqn"
+0.0001
+500
+1
+0.5
+-1
+
+# Processors declaration, with multiplicity
+P {{task|length}}
+{% for t in task %}p {{t.proc.name}} {{t.proc.sched}} m {{t.proc.mult}} 
+{% endfor %}-1
+
+# Tasks declaration
+T {{task|length}}
+{% for t in task %}t {{t.name}} {% if t.ref%}r {%else%}n {% endif %}{% for e in t.getEntries() %} {{e.name}} {%endfor%} -1 {{t.proc.name}} m {{t.tsize}}
+{% endfor %}-1
+
+
+# Entries declaration
+E 0
+#activity declarations
+{#{% for t in task %}{%for e in t.getEntries()%}s {{e.name}} {%if t.ref%}{{(1.0/e.getActivities()[0].stime)}}{%else%}{{(1.0/e.getActivities()[-1].stime)}}{%endif%} -1 
+{%endfor%}{%endfor%}#}
+{% for t in task %}{%for e in t.getEntries()%}
+A {{e.name}} {{e.getActivities()[0].name}}  
+{%endfor%}{%endfor%}
+-1
+
+{% for t in task %}
+A {{t.name}}
+{%for e in t.getEntries()%}
+{%for a in e.getActivities()%}
+s {{a.name}} {%if a.__class__.__name__=="Activity"%}{{1/a.stime}} {%else%}0.00001 {%endif%} 
+{%endfor%}{%endfor%}
+{%for e in t.getEntries()%}
+{%for a in e.getActivities()%}
+{%if a.__class__.__name__=="SynchCall"%}y {{a.name}} {{a.dest.name}} 1.0 
+{%endif%}{%endfor%}{%endfor%}
+:
+{% set ns = namespace(dnIdx = 0) %}
+{%for e in t.getEntries()%}
+{% set outer_loop = loop %}
+{%for d in e.getDnodes()%}
+{%if d.__class__.__name__=="probChoice" and not d.origin.__class__.__name__=="Entry"%}
+{%if d.branches|length==1%}
+{%if not d.parent.getActivities()[0]==d.branches[0]%}
+{% set ns.dnIdx = ns.dnIdx + 1 %}
+{% if not ns.dnIdx==1%};{%endif%}{{d.origin.name}} -> {%for b in d.branches%}{{d.branches[loop.index0].name}}
+{%endfor%}
+{%endif%}
+{%else%}
+{% set ns.dnIdx = ns.dnIdx + 1 %}
+{% if not ns.dnIdx==1%};{%endif%}{{d.origin.name}} -> {%for b in d.branches%}({{(1/d.probs|length)}}){{d.branches[loop.index0].name}}{% if not loop.last %}+{% endif %}
+{%endfor%}
+{%endif%}
+{%endif%}
+{%if d.__class__.__name__=="awsActivity"%}
+{%if not d.activity.parent.parentTask.ref%}
+{% set ns.dnIdx = ns.dnIdx + 1 %}
+{% if not ns.dnIdx==1%};{%endif%}{{d.activity.name}}[{{d.parent.name}}]
+{%endif%}
+{%endif%}
+{%endfor%}
+{%endfor%}
+
+-1
+{%endfor%}
+
+
+# DiffLQN settings, starting with #!
+# These will be ignored by LQNS
+
+# 1. Solver settings
+#! v 1.0e5           # fast rate to approximate instantaneous events
+#! solver ode        # ODE analysis - solver sim will run simulation
+#! confidence_percent_error 0.5
+#! stoptime 2000.0     # integration time horizon
+#! solver_abs_tol 0.000001
+#! steady_abs_tol 0.000001
+
+# 2. Output settings
+#! throughput: Browse
+#! responsetime: Browse -1
+
+# 3. Export settings
+#! export csv

@@ -6,8 +6,11 @@ from glob import glob
 import time
 
 
-#recupero tutti i le cartelle con estensione .lqn,
-#per ognuna di loro recupero le allocazioni ottime e faccio deploy e update e salvo il tempo di inizio e fine esperimento
+# Retrieve all variants within the Acmeair_variants directory
+# For each variant:
+    # Get the optimal allocations
+    # Perform deployment and update
+    # Save the start and end time of the experiment
 
 def runExp():
 	dfexp=getExperiments()
@@ -18,12 +21,11 @@ def runExp():
 	else:
 		exp=[]
 
-	initLogger()
-
 	sys=getSystems()
 	for s in sys:
-		if(s in np.array(exp)[:,0]):
-			print(f"skipping {s}")
+		print(Path(s).name,np.array(exp)[0,0])
+		if(f"./{Path(s).name}" in np.array(exp)[:,0]):
+			print(f"{s} already analyzed, skipping")
 			continue
 		else:
 			print(f"analyzing {s}")
@@ -70,7 +72,7 @@ def moveClientRt(sys,destname):
 	
 
 def getSystems():
-	pattern = "./*.lqn"
+	pattern = str(Path(__file__).parent.joinpath("Acmeair_variants/Acmeair_*"))
 	matching_folders = glob(pattern, recursive=False)  # Perform recursive search
 	return matching_folders
 
@@ -149,12 +151,9 @@ def startSys(sys):
 
 def getExperiments():
 	df=None
-	if(Path("experiments.csv").is_file()):
-		df=pd.read_csv("experiments.csv")
+	if(Path(__file__).parent.joinpath("results/experiments.csv").is_file()):
+		df=pd.read_csv(Path(__file__).parent.joinpath("results/experiments.csv"))
 	return df
-
-def initLogger():
-	pass
 
 if __name__ == '__main__':
 	runExp()

@@ -1,14 +1,14 @@
 clear
 
-exp=["min","median","max"];
+exp=["max","median","min"];
 fsize=32;
 
 for i=1:3
     expname=exp(i);
 
-    data=readmatrix(sprintf("../zoomRes/default/%s/Billable_Instance_Time.csv",expname),"NumHeaderLines",2,"Delimiter",",");
+    data=readmatrix(sprintf("../results/zoomRes/default/%s/Billable_Instance_Time.csv",expname),"NumHeaderLines",2,"Delimiter",",");
     default_bill=data(:,2:end);
-    data=readmatrix(sprintf("../zoomRes/wless/%s/Billable_Instance_Time.csv",expname),"NumHeaderLines",2,"Delimiter",",");
+    data=readmatrix(sprintf("../results//zoomRes/wless/%s/Billable_Instance_Time.csv",expname),"NumHeaderLines",2,"Delimiter",",");
     wless_bill=data(:,2:end);
 
     billable=cat(1,default_bill,wless_bill);
@@ -23,9 +23,11 @@ for i=1:3
     h=plot(billable,"LineWidth",1.5);
     box on
     grid on
-    text(.5,ymax-ymax*0.035,"Default","FontWeight","bold")
+    text(.5,ymax-ymax*0.035,"GCR","FontWeight","bold")
     text(expwidth+0.5,ymax-ymax*0.035,"Wasteless","FontWeight","bold")
     fontsize(gcf,fsize,"pixels");
+    
+    xticklabels()
 
     ylabel("Billable Instance")
     xlabel("Time (m)")
@@ -37,12 +39,12 @@ for i=1:3
     close()
 
     
-    data=readmatrix(sprintf("../zoomRes/default/%s/Request_Latency.csv",expname),"NumHeaderLines",3,"Delimiter",",");
+    data=readmatrix(sprintf("../results/zoomRes/default/%s/Request_Latency.csv",expname),"NumHeaderLines",3,"Delimiter",",");
     default_req_lat=data(:,2:end);
     if(i==3)
         default_req_lat=default_req_lat(2:end,:)
     end
-    data=readmatrix(sprintf("../zoomRes/wless/%s/Request_Latency.csv",expname),"NumHeaderLines",3,"Delimiter",",");
+    data=readmatrix(sprintf("../results/zoomRes/wless/%s/Request_Latency.csv",expname),"NumHeaderLines",3,"Delimiter",",");
     wless_req_lat=data(:,2:end);
 
     data=cat(1,default_req_lat,wless_req_lat);
@@ -57,7 +59,7 @@ for i=1:3
     h=plot(data,"LineWidth",1.5);
     box on
     grid on
-    text(5+0.5,ymax-ymax*0.035,"Default","FontWeight","bold")
+    text(5+0.5,ymax-ymax*0.035,"GCR","FontWeight","bold")
     text(expwidth+0.5,ymax-ymax*0.035,"Wasteless","FontWeight","bold")
     fontsize(gcf,fsize,"pixels");
 
@@ -73,9 +75,9 @@ for i=1:3
     exportgraphics(gcf,sprintf("./figures/%s_rt.pdf",expname))
     close()
 
-    data=readmatrix(sprintf("../zoomRes/default/%s/Max_Concurrent_Requests.csv",expname),"NumHeaderLines",2,"Delimiter",",");
+    data=readmatrix(sprintf("../results/zoomRes/default/%s/Max_Concurrent_Requests.csv",expname),"NumHeaderLines",2,"Delimiter",",");
     default_conc=data(:,2:end);
-    data=readmatrix(sprintf("../zoomRes/wless/%s/Max_Concurrent_Requests.csv",expname),"NumHeaderLines",2,"Delimiter",",");
+    data=readmatrix(sprintf("../results/zoomRes/wless/%s/Max_Concurrent_Requests.csv",expname),"NumHeaderLines",2,"Delimiter",",");
     wless_conc=data(:,2:end);
 
     concurrent=cat(1,default_conc,wless_conc);
@@ -91,7 +93,7 @@ for i=1:3
     box on
     grid on
     
-    text(.5,ymax-ymax*0.035,"Default","FontWeight","bold")
+    text(.5,ymax-ymax*0.035,"GCR","FontWeight","bold")
     text(expwidth+0.5,ymax-ymax*0.035,"Wasteless","FontWeight","bold")
     fontsize(gcf,fsize,"pixels");
 

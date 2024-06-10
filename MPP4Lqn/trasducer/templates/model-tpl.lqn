@@ -1,0 +1,63 @@
+# This block is supported for backward compatibility
+# but it is not used by DiffLQN
+G
+"simple-qn.lqn"
+0.0001
+500
+1
+0.5
+-1
+
+# Processors declaration, with multiplicity
+P {{task|length}}
+{% for t in task %}p {{t.proc.name}} {{t.proc.sched}} m {{t.proc.mult}} 
+{% endfor %}-1
+
+# Tasks declaration
+T {{task|length}}
+{% for t in task %}t {{t.name}} {% if t.ref%}r {%else%}n {% endif %}{% for e in t.getEntries() %} {{e.name}} {%endfor%} -1 {{t.proc.name}} m {{t.tsize}}
+{% endfor %}-1
+
+# Entries declaration
+E 0
+#service time declarations
+{% for t in task %}{%for e in t.getEntries()%}s {{e.name}} {%if t.ref%}{{(1.0/e.getActivities()[0].stime)}}{%else%}{{(1.0/e.getActivities()[-1].stime)}}{%endif%} -1 
+{%endfor%}{%endfor%}
+#synch declarations
+{% for t in task %}
+{%for e in t.getEntries()%}
+{%for a in e.getActivities()%}
+{%if a.__class__.__name__=="SynchCall"%}
+y {{e.name}} {{a.dest.name}} 1.0 -1
+{%endif%}
+{%endfor%}
+{%endfor%}
+{%endfor%}
+#Asynch declarations
+{% for t in task %}
+{%for e in t.getEntries()%}
+{%for a in e.getActivities()%}
+{%if a.__class__.__name__=="AsynchCall"%}
+z {{e.name}} {{a.dest.name}} 1.0 -1
+{%endif%}
+{%endfor%}{%endfor%}{%endfor%}-1
+
+
+
+# DiffLQN settings, starting with #!
+# These will be ignored by LQNS
+
+# 1. Solver settings
+#! v 1.0e5           # fast rate to approximate instantaneous events
+#! solver ode        # ODE analysis - solver sim will run simulation
+#! confidence_percent_error 0.5
+#! stoptime 2000.0     # integration time horizon
+#! solver_abs_tol 0.000001
+#! steady_abs_tol 0.000001
+
+# 2. Output settings
+#! throughput: Browse
+#! responsetime: Browse -1
+
+# 3. Export settings
+#! export csv

@@ -1,0 +1,8 @@
+numpy 
+pandas
+pytz
+matplotlib
+pygnuplot
+scipy
+jinja2
+locust
