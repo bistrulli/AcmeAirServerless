@@ -44,8 +44,9 @@ python3 runexp.py
 python3 extractExpData.py
 #To reproduce the plots
 cd plot
-#Where matlab is the Matlab executable. Please set this command as an environment variable or specify the full Matlab executable path
-matlab  -nodesktop -r "run('plot_overall.m');quit();"
+#Where matlab is the Matlab executable. Please set this command as an 
+#environment variable or specify the full Matlab executable path
+matlab  -nodesktop -r "run('plot_zoom.m');run('plot_overall.m');quit();"
 
 
 
