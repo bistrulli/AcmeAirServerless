@@ -179,5 +179,3 @@ modelname,exptype,action,time
 ./Acmeair_8,noconc,end,1710452409.5698318
 ./Acmeair_8,wlessconc,start,1710452668.259742
 ./Acmeair_8,wlessend,end,1710453269.720734
-./Acmeair_0,propackconc,start,1726757712.067353
-./Acmeair_0,propackconc,end,1726758317.4336581
