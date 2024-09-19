@@ -5,6 +5,6 @@ do
 	# Use dirname to get the base path
 	fun_path=$(dirname $(realpath "$d"))
 	cd $fun_path
-	source deploy.sh
+	sh deploy.sh
 	cd -
 done
