@@ -9,6 +9,6 @@ gcloud beta functions deploy msupdateprofileentry \
 --cpu=1 \
 --trigger-http \
 --allow-unauthenticated \
---project modellearning \
+--project my-microservice-test-project \
 --max-instances=100 \
 --min-instances=1

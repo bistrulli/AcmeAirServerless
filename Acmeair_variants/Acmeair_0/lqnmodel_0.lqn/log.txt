@@ -1,0 +1,2 @@
+2024-09-01 14:49:28 INFO     Updating model in path /Users/emilio-imt/git/Wless/Acmeair_variants/Acmeair_0/lqnmodel_0.lqn/model.lqn
+2024-09-01 14:49:28 INFO     Solving model /Users/emilio-imt/git/Wless/Acmeair_variants/Acmeair_0/lqnmodel_0.lqn/acmeInstance.lqn

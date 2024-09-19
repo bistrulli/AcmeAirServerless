@@ -22,7 +22,7 @@ T {{task|length}}
 # Entries declaration
 E 0
 #activity declarations
-{#{% for t in task %}{%for e in t.getEntries()%}s {{e.name}} {%if t.ref%}{{(1.0/e.getActivities()[0].stime)}}{%else%}{{(1.0/e.getActivities()[-1].stime)}}{%endif%} -1 
+{#{% for t in task %}{%for e in t.getEntries()%}s {{e.name}} {%if t.ref%}{{(e.getActivities()[0].stime)}}{%else%}{{(e.getActivities()[-1].stime)}}{%endif%} -1 
 {%endfor%}{%endfor%}#}
 {% for t in task %}{%for e in t.getEntries()%}
 A {{e.name}} {{e.getActivities()[0].name}}  
@@ -33,22 +33,14 @@ A {{e.name}} {{e.getActivities()[0].name}}
 A {{t.name}}
 {%for e in t.getEntries()%}
 {%for a in e.getActivities()%}
-s {{a.name}} {%if a.__class__.__name__=="Activity"%}{{1/a.stime}} {%else%}0.00001 {%endif%} 
+s {{a.name}} {%if a.__class__.__name__=="Activity"%}{{a.stime}} {%else%}0.00001 {%endif%} 
 {%endfor%}{%endfor%}
 {%for e in t.getEntries()%}
 {%for a in e.getActivities()%}
 {%if a.__class__.__name__=="SynchCall"%}y {{a.name}} {{a.dest.name}} 1.0 
 {%endif%}{%endfor%}{%endfor%}
 :
-{% set ns = namespace(dnIdx = 0) %}
-{%for e in t.getEntries()%}
-{% set outer_loop = loop %}
-{%for d in e.getDnodes()%}
-{%if d.__class__.__name__=="probChoice" and not d.origin.__class__.__name__=="Entry"%}
-{%if d.branches|length==1%}
-{%if not d.parent.getActivities()[0]==d.branches[0]%}
-{% set ns.dnIdx = ns.dnIdx + 1 %}
-{% if not ns.dnIdx==1%};{%endif%}{{d.origin.name}} -> {%for b in d.branches%}{{d.branches[loop.index0].name}}
+{% set ns = namespace(dnIdx = 0) %}{%for e in t.getEntries()%}{% set outer_loop = loop %}{%for d in e.getDnodes()%}{%if d.__class__.__name__=="probChoice" and not d.origin.__class__.__name__=="Entry"%}{%if d.branches|length==1%}{%if not d.parent.getActivities()[0]==d.branches[0]%}{% set ns.dnIdx = ns.dnIdx + 1 %}{% if not ns.dnIdx==1%};{%endif%}{{d.origin.name}} -> {%for b in d.branches%}{{d.branches[loop.index0].name}}
 {%endfor%}
 {%endif%}
 {%else%}
@@ -57,16 +49,13 @@ s {{a.name}} {%if a.__class__.__name__=="Activity"%}{{1/a.stime}} {%else%}0.0000
 {%endfor%}
 {%endif%}
 {%endif%}
-{%if d.__class__.__name__=="awsActivity"%}
-{%if not d.activity.parent.parentTask.ref%}
-{% set ns.dnIdx = ns.dnIdx + 1 %}
-{% if not ns.dnIdx==1%};{%endif%}{{d.activity.name}}[{{d.parent.name}}]
+{%if d.__class__.__name__=="awsActivity"%}{%if not d.activity.parent.parentTask.ref%}{% set ns.dnIdx = ns.dnIdx + 1 %}{% if not ns.dnIdx==1%};{%endif%}{{d.activity.name}}[{{d.parent.name}}]
 {%endif%}
 {%endif%}
 {%endfor%}
 {%endfor%}
-
 -1
+
 {%endfor%}
 
 

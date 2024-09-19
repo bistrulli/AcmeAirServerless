@@ -1,0 +1,170 @@
+# This block is supported for backward compatibility
+# but it is not used by DiffLQN
+G
+"simple-qn.lqn"
+0.0001
+500
+1
+0.5
+-1
+
+# Processors declaration, with multiplicity
+P 10
+p T_clientEntry f m 1000 
+p T_MSauthEntry f m 100
+p T_MSvalidateidEntry f m 100
+p T_MSviewprofileEntry f m 100
+p T_MSupdateprofileEntry f m 100 
+p T_MSupdateMilesEntry f m 100
+p T_MSbookflightsEntry f m 100
+p T_MScancelbookingEntry f m 100 
+p T_MSqueryflightsEntry f m 100 
+p T_MSgetrewardmilesEntry f m 100 
+-1
+
+# Tasks declaration
+T 10
+t T_clientEntry r  clientEntry  -1 T_clientEntry m 1
+t T_MSauthEntry n  MSauthEntry  -1 T_MSauthEntry m 1
+t T_MSvalidateidEntry n  MSvalidateidEntry  -1 T_MSvalidateidEntry m 1
+t T_MSviewprofileEntry n  MSviewprofileEntry  -1 T_MSviewprofileEntry m 1
+t T_MSupdateprofileEntry n  MSupdateprofileEntry  -1 T_MSupdateprofileEntry m 1
+t T_MSupdateMilesEntry n  MSupdateMilesEntry  -1 T_MSupdateMilesEntry m 1
+t T_MSbookflightsEntry n  MSbookflightsEntry  -1 T_MSbookflightsEntry m 1
+t T_MScancelbookingEntry n  MScancelbookingEntry  -1 T_MScancelbookingEntry m 1
+t T_MSqueryflightsEntry n  MSqueryflightsEntry  -1 T_MSqueryflightsEntry m 1
+t T_MSgetrewardmilesEntry n  MSgetrewardmilesEntry  -1 T_MSgetrewardmilesEntry m 1
+-1
+
+
+# Entries declaration
+E 0
+#activity declarations
+A clientEntry clientEntry_A1ToMSviewprofileEntry  
+A MSauthEntry MSauthEntry_A1ToMSvalidateidEntry  
+A MSvalidateidEntry MSvalidateidEntry_A1  
+A MSviewprofileEntry MSviewprofileEntry_A1  
+A MSupdateprofileEntry MSupdateprofileEntry_A1  
+A MSupdateMilesEntry MSupdateMilesEntry_A1  
+A MSbookflightsEntry MSbookflightsEntry_A1ToMSupdateMilesEntry  
+A MScancelbookingEntry MScancelbookingEntry_A1ToMSupdateMilesEntry  
+A MSqueryflightsEntry MSqueryflightsEntry_A1  
+A MSgetrewardmilesEntry MSgetrewardmilesEntry_A1  
+-1
+
+A T_clientEntry
+s clientEntry_A1ToMSviewprofileEntry 0.00001  
+s clientEntry_A2ToMSupdateprofileEntry 0.00001  
+s clientEntry_A3ToMSbookflightsEntry 0.00001  
+s clientEntry_A4ToMScancelbookingEntry 0.00001  
+s clientEntry_A5ToMSqueryflightsEntry 0.00001  
+s clientEntry_A6ToMSauthEntry 0.00001  
+s clientEntry_A7 0.02377  
+y clientEntry_A1ToMSviewprofileEntry MSviewprofileEntry 1.0 
+y clientEntry_A2ToMSupdateprofileEntry MSupdateprofileEntry 1.0 
+y clientEntry_A3ToMSbookflightsEntry MSbookflightsEntry 1.0 
+y clientEntry_A4ToMScancelbookingEntry MScancelbookingEntry 1.0 
+y clientEntry_A5ToMSqueryflightsEntry MSqueryflightsEntry 1.0 
+y clientEntry_A6ToMSauthEntry MSauthEntry 1.0 
+:
+clientEntry_A1ToMSviewprofileEntry -> clientEntry_A2ToMSupdateprofileEntry;
+clientEntry_A2ToMSupdateprofileEntry -> clientEntry_A3ToMSbookflightsEntry;
+clientEntry_A3ToMSbookflightsEntry -> clientEntry_A4ToMScancelbookingEntry;
+clientEntry_A4ToMScancelbookingEntry -> clientEntry_A5ToMSqueryflightsEntry;
+clientEntry_A5ToMSqueryflightsEntry -> clientEntry_A6ToMSauthEntry;
+clientEntry_A6ToMSauthEntry -> clientEntry_A7
+-1
+
+A T_MSauthEntry
+s MSauthEntry_A1ToMSvalidateidEntry 0.00001  
+s MSauthEntry_A2 0.0652  
+y MSauthEntry_A1ToMSvalidateidEntry MSvalidateidEntry 1.0 
+:
+MSauthEntry_A1ToMSvalidateidEntry -> MSauthEntry_A2;
+MSauthEntry_A2[MSauthEntry]
+-1
+
+A T_MSvalidateidEntry
+s MSvalidateidEntry_A1 0.03771  
+:
+MSvalidateidEntry_A1[MSvalidateidEntry]
+-1
+
+A T_MSviewprofileEntry
+s MSviewprofileEntry_A1 0.04871  
+:
+MSviewprofileEntry_A1[MSviewprofileEntry]
+-1
+
+A T_MSupdateprofileEntry
+s MSupdateprofileEntry_A1 0.03522  
+:
+MSupdateprofileEntry_A1[MSupdateprofileEntry]
+-1
+
+A T_MSupdateMilesEntry
+s MSupdateMilesEntry_A1 0.02139  
+:
+MSupdateMilesEntry_A1[MSupdateMilesEntry]
+-1
+
+A T_MSbookflightsEntry
+s MSbookflightsEntry_A1ToMSupdateMilesEntry 0.00001  
+s MSbookflightsEntry_A2ToMSgetrewardmilesEntry 0.00001  
+s MSbookflightsEntry_A3ToMSupdateMilesEntry 0.00001  
+s MSbookflightsEntry_A4ToMSgetrewardmilesEntry 0.00001  
+s MSbookflightsEntry_A5 0.02683  
+y MSbookflightsEntry_A1ToMSupdateMilesEntry MSupdateMilesEntry 1.0 
+y MSbookflightsEntry_A2ToMSgetrewardmilesEntry MSgetrewardmilesEntry 1.0 
+y MSbookflightsEntry_A3ToMSupdateMilesEntry MSupdateMilesEntry 1.0 
+y MSbookflightsEntry_A4ToMSgetrewardmilesEntry MSgetrewardmilesEntry 1.0 
+:
+MSbookflightsEntry_A1ToMSupdateMilesEntry -> MSbookflightsEntry_A2ToMSgetrewardmilesEntry;
+MSbookflightsEntry_A2ToMSgetrewardmilesEntry -> MSbookflightsEntry_A3ToMSupdateMilesEntry;
+MSbookflightsEntry_A3ToMSupdateMilesEntry -> MSbookflightsEntry_A4ToMSgetrewardmilesEntry;
+MSbookflightsEntry_A4ToMSgetrewardmilesEntry -> MSbookflightsEntry_A5;
+MSbookflightsEntry_A5[MSbookflightsEntry]
+-1
+
+A T_MScancelbookingEntry
+s MScancelbookingEntry_A1ToMSupdateMilesEntry 0.00001  
+s MScancelbookingEntry_A2ToMSgetrewardmilesEntry 0.00001  
+s MScancelbookingEntry_A3 0.20939  
+y MScancelbookingEntry_A1ToMSupdateMilesEntry MSupdateMilesEntry 1.0 
+y MScancelbookingEntry_A2ToMSgetrewardmilesEntry MSgetrewardmilesEntry 1.0 
+:
+MScancelbookingEntry_A1ToMSupdateMilesEntry -> MScancelbookingEntry_A2ToMSgetrewardmilesEntry;
+MScancelbookingEntry_A2ToMSgetrewardmilesEntry -> MScancelbookingEntry_A3;
+MScancelbookingEntry_A3[MScancelbookingEntry]
+-1
+
+A T_MSqueryflightsEntry
+s MSqueryflightsEntry_A1 0.04979  
+:
+MSqueryflightsEntry_A1[MSqueryflightsEntry]
+-1
+
+A T_MSgetrewardmilesEntry
+s MSgetrewardmilesEntry_A1 0.02377  
+:
+MSgetrewardmilesEntry_A1[MSgetrewardmilesEntry]
+-1
+
+
+
+# DiffLQN settings, starting with #!
+# These will be ignored by LQNS
+
+# 1. Solver settings
+#! v 1.0e5           # fast rate to approximate instantaneous events
+#! solver ode        # ODE analysis - solver sim will run simulation
+#! confidence_percent_error 0.5
+#! stoptime 2000.0     # integration time horizon
+
+
+# 2. Output settings
+#! throughput: MSauthEntry MSviewprofileEntry MSqueryflightsEntry MSbookflightsEntry MSupdateprofileEntry MScancelbookingEntry MSvalidateidEntry MSupdateMilesEntry MSgetrewardmilesEntry
+#! responsetime: MSauthEntry MSviewprofileEntry MSqueryflightsEntry MSbookflightsEntry MSupdateprofileEntry MScancelbookingEntry MSvalidateidEntry MSupdateMilesEntry MSgetrewardmilesEntry -1
+
+# 3. Export settings
+#! export csv

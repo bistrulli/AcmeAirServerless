@@ -39,7 +39,7 @@ public class Logic implements HttpFunction {
 	public void MSbookflightsEntry_A1(){
 		this.act_exec.put("MSbookflightsEntry_A1", true);
 		this.doWork(1.0E-5);
-		String url = "https://northamerica-northeast1-modellearning.cloudfunctions.net/msupdatemilesentry";
+		String url = "https://northamerica-northeast1-my-microservice-test-project.cloudfunctions.net/msupdatemilesentry";
 		var getRequest = java.net.http.HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
 		try {
@@ -53,7 +53,7 @@ public class Logic implements HttpFunction {
 	public void MSbookflightsEntry_A2(){
 		this.act_exec.put("MSbookflightsEntry_A2", true);
 		this.doWork(1.0E-5);
-		String url = "https://northamerica-northeast1-modellearning.cloudfunctions.net/msgetrewardmilesentry";
+		String url = "https://northamerica-northeast1-my-microservice-test-project.cloudfunctions.net/msgetrewardmilesentry";
 		var getRequest = java.net.http.HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
 		try {
@@ -67,7 +67,7 @@ public class Logic implements HttpFunction {
 	public void MSbookflightsEntry_A3(){
 		this.act_exec.put("MSbookflightsEntry_A3", true);
 		this.doWork(1.0E-5);
-		String url = "https://northamerica-northeast1-modellearning.cloudfunctions.net/msupdatemilesentry";
+		String url = "https://northamerica-northeast1-my-microservice-test-project.cloudfunctions.net/msupdatemilesentry";
 		var getRequest = java.net.http.HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
 		try {
@@ -81,7 +81,7 @@ public class Logic implements HttpFunction {
 	public void MSbookflightsEntry_A4(){
 		this.act_exec.put("MSbookflightsEntry_A4", true);
 		this.doWork(1.0E-5);
-		String url = "https://northamerica-northeast1-modellearning.cloudfunctions.net/msgetrewardmilesentry";
+		String url = "https://northamerica-northeast1-my-microservice-test-project.cloudfunctions.net/msgetrewardmilesentry";
 		var getRequest = java.net.http.HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
 		try {

@@ -1,0 +1,41 @@
+G
+"acmeair_1.lqn"
+0.0001
+500
+1
+0.5
+-1
+
+# Processors declaration, with multiplicity 
+P 0
+p ProcClient f m 20
+p Procf1 f m 10
+-1
+
+# Tasks declaration
+T 0
+t client r clientEntry -1 ProcClient m 12
+t f1 n f1_svc -1 Procf1 m 10
+-1
+
+# Entries declaration
+E 0
+s clientEntry 0.00001 -1
+s f1_svc 0.1 -1
+y clientEntry f1_svc 1.0 -1
+-1
+
+# 1. Solver settings
+#! v 1.0e5           	# fast rate to approximate instantaneous events
+#! solver ode        	# ODE analysis - solver sim will run simulation
+#! confidence_level 0.95
+#! confidence_percent_error 0.01
+#! stoptime 1000.0
+
+# 2. Output settings
+#! throughput: clientEntry f1_svc
+#! utilization: clientEntry f1_svc
+#! responsetime: clientEntry f1_svc -1
+
+# 3. Export settings
+#! export csv

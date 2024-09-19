@@ -39,7 +39,7 @@ public class Logic implements HttpFunction {
 	public void MSauthEntry_A1(){
 		this.act_exec.put("MSauthEntry_A1", true);
 		this.doWork(1.0E-5);
-		String url = "https://northamerica-northeast1-modellearning.cloudfunctions.net/msvalidateidentry";
+		String url = "https://northamerica-northeast1-my-microservice-test-project.cloudfunctions.net/msvalidateidentry";
 		var getRequest = java.net.http.HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
 		try {

@@ -22,7 +22,7 @@ end
 p.MU = MU; 
 p.NT = NT;
 p.NC = NC;
-p.delta = 10^5; % context switch rate (super fast)
+p.delta = 10^6; % context switch rate (super fast)
 
 %probchoices
 p.P_clientEntryclientEntry_A2clientEntryD0=1.0;
@@ -152,7 +152,7 @@ jump=[-1,  +1,  +0,  +0,  +0,  +0,  +0,  +0,  +0,  +0,  +0,  +0,  +0,  +0,  +0, 
 
 T = @(X)propensities_2state(X,p);
 opts = odeset('Events',@(t,y)eventfun(t,y,jump,T));
-[t,y]=ode15s(@(t,y) jump'*T(y),linspace(0,1000,10001), X0,opts);
+[t,y]=ode15s(@(t,y) jump'*T(y),linspace(0,100,1001), X0,opts);
 
 ssR=T(y(end,:)');
 

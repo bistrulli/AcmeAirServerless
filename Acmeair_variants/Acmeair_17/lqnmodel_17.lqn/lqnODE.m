@@ -22,7 +22,7 @@ end
 p.MU = MU; 
 p.NT = NT;
 p.NC = NC;
-p.delta = 10^5; % context switch rate (super fast)
+p.delta = 10^6; % context switch rate (super fast)
 
 %probchoices
 p.P_clientEntryclientEntry_A2clientEntryD0=1.0;

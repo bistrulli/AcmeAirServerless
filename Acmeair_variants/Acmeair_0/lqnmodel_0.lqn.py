@@ -306,6 +306,6 @@ if __name__ == '__main__':
 	#lqn2mpp.removeInfSynch()
 	#lqn2mpp.removeInfAsynch()
 	#lqn2mpp.removeInfAcquire()
-	lqn2mpp.toMatlab(outDir="./")
-	#lqn2mpp.toLqns(outDir="model",LQN=LQN)
+	#lqn2mpp.toMatlab(outDir="./")
+	lqn2mpp.toLqns(outDir="./",LQN=LQN)
 	

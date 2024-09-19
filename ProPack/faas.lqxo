@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+<!-- lqns -xml -->
+<lqn-model name="/home/root/ProPack/faas" description="lqns 6.2.28 solution for model from: /home/root/ProPack/faas.lqn." xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/usr/local/share/lqns/lqn.xsd">
+   <solver-params comment="acmeair_1.lqn" conv_val="0.0001" it_limit="500" underrelax_coeff="0.5" print_int="1">
+      <result-general solver-info="lqns 6.2.28" valid="true" conv-val="2.47646e-08" iterations="3" platform-info="0f569850327c Linux 6.10.0-linuxkit" user-cpu-time=" 0:00:00.005" system-cpu-time=" 0:00:00.000" elapsed-time=" 0:00:00.005" max-rss="13820">
+         <mva-info submodels="2" core="6" step="38" step-squared="270" wait="711" wait-squared="157623" faults="0"/>
+      </result-general>
+   </solver-params>
+   <processor name="ProcClient" scheduling="fcfs">
+      <result-processor utilization="1"/>
+      <task name="client" scheduling="ref" multiplicity="10000">
+         <result-task throughput="1" utilization="10000" phase1-utilization="10000" proc-utilization="1"/>
+         <entry name="clientEntry" type="PH1PH2">
+            <result-entry utilization="10000" throughput="1" proc-utilization="1" squared-coeff-variation="0.9999" throughput-bound="9090.91"/>
+            <entry-phase-activities>
+               <activity name="clientEntry_ph1" phase="1" host-demand-mean="1">
+                  <result-activity proc-waiting="9998.9" service-time="10000" utilization="10000" service-time-variance="9.999e+07"/>
+                  <synch-call dest="f1_svc" calls-mean="1">
+                     <result-call waiting="0"/>
+                  </synch-call>
+               </activity>
+            </entry-phase-activities>
+         </entry>
+      </task>
+   </processor>
+   <processor name="Procf1" scheduling="fcfs" multiplicity="10">
+      <result-processor utilization="0.1"/>
+      <task name="f1" scheduling="fcfs" multiplicity="10">
+         <result-task throughput="1" utilization="0.1" phase1-utilization="0.1" proc-utilization="0.1"/>
+         <entry name="f1_svc" type="PH1PH2">
+            <result-entry utilization="0.1" throughput="1" proc-utilization="0.1" squared-coeff-variation="1" throughput-bound="100"/>
+            <entry-phase-activities>
+               <activity name="f1_svc_ph1" phase="1" host-demand-mean="0.1">
+                  <result-activity proc-waiting="0" service-time="0.1" utilization="0.1" service-time-variance="0.01"/>
+               </activity>
+            </entry-phase-activities>
+         </entry>
+      </task>
+   </processor>
+</lqn-model>

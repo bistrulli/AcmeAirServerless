@@ -1,0 +1,10 @@
+name,ncopt,ntopt
+MSauthEntry,16
+MSvalidateidEntry,20
+MSviewprofileEntry,20
+MSupdateprofileEntry,9
+MSupdateMilesEntry,37
+MSbookflightsEntry,10
+MScancelbookingEntry,46
+MSqueryflightsEntry,37
+MSgetrewardmilesEntry,39

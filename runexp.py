@@ -4,6 +4,7 @@ import subprocess
 from pathlib import Path
 from glob import glob
 import time
+import re
 
 
 # Retrieve all variants within the Acmeair_variants directory
@@ -23,45 +24,67 @@ def runExp():
 
 	sys=getSystems()
 	for s in sys:
-		print(Path(s).name,np.array(exp)[0,0])
-		if(f"./{Path(s).name}" in np.array(exp)[:,0]):
-			print(f"{s} already analyzed, skipping")
-			continue
-		else:
-			print(f"analyzing {s}")
-
-		deploySys(s)
+		# if(Path(s).name=="Acmeair_1"):
+		# 	print(f"analyzing {Path(s).name}")
+		# else:
+		# 	continue
 		
-		setDefConc(s)
-		exp+=[[s,"defconc","start",time.time()]]
-		startSys(s)
-		exp+=[[s,"defconc","end",time.time()]]
-		moveClientRt(s,"defconcrt")
+		deploySys(s)
 
-		time.sleep(120)
+		modelname=f"./{Path(s).name}"
+		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="defconc")].shape[0]>0):
+			print(f"{modelname} defconc analized")
+		else:
+			setDefConc(s)
+			exp+=[[s,"defconc","start",time.time()]]
+			startSys(s)
+			exp+=[[s,"defconc","end",time.time()]]
+			moveClientRt(s,"defconcrt")
+			time.sleep(120)
 
-		setNoConc(s)
-		exp+=[[s,"noconc","start",time.time()]]
-		startSys(s)
-		exp+=[[s,"noconc","end",time.time()]]
-		moveClientRt(s,"noconcrt")
+		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
+			print(f"{modelname} noconc analized")
+		else:
+			setNoConc(s)
+			exp+=[[s,"noconc","start",time.time()]]
+			startSys(s)
+			exp+=[[s,"noconc","end",time.time()]]
+			moveClientRt(s,"noconcrt")
+			time.sleep(120)
 
-		time.sleep(120)
+		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
+			print(f"{modelname} wlessconc analized")
+		else:
+			setWlessConc(s)
+			exp+=[[s,"wlessconc","start",time.time()]]
+			startSys(s)
+			exp+=[[s,"wlessend","end",time.time()]]
+			moveClientRt(s,"wlessrt")
+			time.sleep(120)
 
-		setWlessConc(s)
-		exp+=[[s,"wlessconc","start",time.time()]]
-		startSys(s)
-		exp+=[[s,"wlessend","end",time.time()]]
-		moveClientRt(s,"wlessrt")
-
-		time.sleep(120)
+		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
+			print(f"{modelname} propackconc analized")
+		else:
+			setProPackConc(s)
+			exp+=[[s,"propackconc","start",time.time()]]
+			startSys(s)
+			exp+=[[s,"propackconc","end",time.time()]]
+			moveClientRt(s,"propackrt")
+			time.sleep(120)
+			print("should run ProPack")
 
 		df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
-		df.to_csv("experiments.csv", index=False)
+		df.to_csv("./results/experiments.csv", index=False)
 
 def getOptNT(sys):
 	print(f"getOptNT {sys}")
 	df=pd.read_csv(f"{sys.absolute()}/{sys.name}/optSol.csv")
+	return df
+
+def getProPackNT(sys):
+	print(f"getProPackNT {sys}")
+	instanceNbr=re.findall(r"[0-9]+",sys.name)[0]
+	df=pd.read_csv(f"{sys.absolute()}/lqnmodel_{instanceNbr}.lqn/ProPackSol.csv",)
 	return df
 
 def moveClientRt(sys,destname):
@@ -114,6 +137,27 @@ def setWlessConc(sys):
 		with open("update.log", "w") as outfile:
 		 	subprocess.run(command, cwd=working_dir)#stdout=outfile, stderr=subprocess.STDOUT)
 
+def setProPackConc(sys):
+	sys=Path(sys)
+	print(f"setProPackConc {sys}")
+
+	ntopt=getProPackNT(sys)
+
+	pattern = f"{sys}/MS**Entry"
+	matching_folders = glob(pattern, recursive=False)  # Perform recursive search
+
+	for ms in matching_folders:
+		print(f"Updating {Path(ms).name}")
+
+		nt=ntopt[ntopt["name"]==Path(ms).name]["ncopt"].iloc[0]
+
+		# Define the command and working directory
+		command = ["sh","./update.sh",f"{nt}","200","1"]
+		working_dir = Path(ms).absolute()
+
+		with open("update.log", "w") as outfile:
+		 	subprocess.run(command, cwd=working_dir)#stdout=outfile, stderr=subprocess.STDOUT)
+
 def setNoConc(sys):
 	sys=Path(sys)
 	print(f"setNoConc {sys}")
@@ -155,5 +199,28 @@ def getExperiments():
 		df=pd.read_csv(Path(__file__).parent.joinpath("results/experiments.csv"))
 	return df
 
+def computeProPack(sys):
+	sys=Path(sys)
+	print(f"computing ProPack on {sys}")
+
+	instanceNbr=re.findall(r"[0-9]+",sys.name)[0]
+
+	pattern = f"{sys}/**/lqnmodel_{instanceNbr}.lqn"
+	matching_folders = glob(pattern, recursive=True)  # Perform recursive search
+
+	if(len(matching_folders)==0):
+		raise ValueError(f"{pattern} not found")
+
+	scriptDir=matching_folders[0]
+
+	command = ["sh","runProPack.sh"]
+	working_dir = Path(scriptDir).absolute()
+
+	with open("ProPack.log", "w") as outfile:
+		subprocess.run(command, cwd=working_dir)#,stdout=outfile, stderr=subprocess.STDOUT)	
+
 if __name__ == '__main__':
 	runExp()
+	# sys=getSystems()
+	# for s in sys:
+	# 	computeProPack(s)
