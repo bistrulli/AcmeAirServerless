@@ -40,6 +40,10 @@ def runExp():
 			startSys(s)
 			exp+=[[modelname,"defconc","end",time.time()]]
 			moveClientRt(s,"defconcrt")
+			
+			df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
+			df.to_csv("./results/experiments.csv", index=False)
+			
 			time.sleep(120)
 
 		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
@@ -50,6 +54,10 @@ def runExp():
 			startSys(s)
 			exp+=[[modelname,"noconc","end",time.time()]]
 			moveClientRt(s,"noconcrt")
+
+			df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
+			df.to_csv("./results/experiments.csv", index=False)
+			
 			time.sleep(120)
 
 		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
@@ -60,6 +68,10 @@ def runExp():
 			startSys(s)
 			exp+=[[modelname,"wlessend","end",time.time()]]
 			moveClientRt(s,"wlessrt")
+
+			df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
+			df.to_csv("./results/experiments.csv", index=False)
+			
 			time.sleep(120)
 
 		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
@@ -70,11 +82,12 @@ def runExp():
 			startSys(s)
 			exp+=[[modelname,"propackconc","end",time.time()]]
 			moveClientRt(s,"propackrt")
-			time.sleep(120)
-			print("should run ProPack")
 
-		df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
-		df.to_csv("./results/experiments.csv", index=False)
+			df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
+			df.to_csv("./results/experiments.csv", index=False)
+
+			time.sleep(120)
+			
 
 def getOptNT(sys):
 	print(f"getOptNT {sys}")
