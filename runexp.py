@@ -36,9 +36,9 @@ def runExp():
 			print(f"{modelname} defconc analized")
 		else:
 			setDefConc(s)
-			exp+=[[s,"defconc","start",time.time()]]
+			exp+=[[modelname,"defconc","start",time.time()]]
 			startSys(s)
-			exp+=[[s,"defconc","end",time.time()]]
+			exp+=[[modelname,"defconc","end",time.time()]]
 			moveClientRt(s,"defconcrt")
 			time.sleep(120)
 
@@ -46,9 +46,9 @@ def runExp():
 			print(f"{modelname} noconc analized")
 		else:
 			setNoConc(s)
-			exp+=[[s,"noconc","start",time.time()]]
+			exp+=[[modelname,"noconc","start",time.time()]]
 			startSys(s)
-			exp+=[[s,"noconc","end",time.time()]]
+			exp+=[[modelname,"noconc","end",time.time()]]
 			moveClientRt(s,"noconcrt")
 			time.sleep(120)
 
@@ -56,9 +56,9 @@ def runExp():
 			print(f"{modelname} wlessconc analized")
 		else:
 			setWlessConc(s)
-			exp+=[[s,"wlessconc","start",time.time()]]
+			exp+=[[modelname,"wlessconc","start",time.time()]]
 			startSys(s)
-			exp+=[[s,"wlessend","end",time.time()]]
+			exp+=[[modelname,"wlessend","end",time.time()]]
 			moveClientRt(s,"wlessrt")
 			time.sleep(120)
 
@@ -66,9 +66,9 @@ def runExp():
 			print(f"{modelname} propackconc analized")
 		else:
 			setProPackConc(s)
-			exp+=[[s,"propackconc","start",time.time()]]
+			exp+=[[modelname,"propackconc","start",time.time()]]
 			startSys(s)
-			exp+=[[s,"propackconc","end",time.time()]]
+			exp+=[[modelname,"propackconc","end",time.time()]]
 			moveClientRt(s,"propackrt")
 			time.sleep(120)
 			print("should run ProPack")
@@ -78,7 +78,8 @@ def runExp():
 
 def getOptNT(sys):
 	print(f"getOptNT {sys}")
-	df=pd.read_csv(f"{sys.absolute()}/{sys.name}/optSol.csv")
+	instanceNbr=re.findall(r"[0-9]+",sys.name)[0]
+	df=pd.read_csv(f"{sys.absolute()}/lqnmodel_{instanceNbr}.lqn/optSol.csv")
 	return df
 
 def getProPackNT(sys):
