@@ -32,7 +32,7 @@ def runExp():
 		deploySys(s)
 
 		modelname=f"./{Path(s).name}"
-		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="defconc")].shape[0]>0):
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="defconc")].shape[0]>0):
 			print(f"{modelname} defconc analized")
 		else:
 			setDefConc(s)
@@ -42,7 +42,7 @@ def runExp():
 			moveClientRt(s,"defconcrt")
 			time.sleep(120)
 
-		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
 			print(f"{modelname} noconc analized")
 		else:
 			setNoConc(s)
@@ -52,7 +52,7 @@ def runExp():
 			moveClientRt(s,"noconcrt")
 			time.sleep(120)
 
-		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
 			print(f"{modelname} wlessconc analized")
 		else:
 			setWlessConc(s)
@@ -62,7 +62,7 @@ def runExp():
 			moveClientRt(s,"wlessrt")
 			time.sleep(120)
 
-		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
 			print(f"{modelname} propackconc analized")
 		else:
 			setProPackConc(s)
