@@ -98,7 +98,7 @@ def runExp():
 			
 			time.sleep(120)
 
-		if(doPropacl)
+		if(doPropacl):
 			setProPackConc(s)
 			exp+=[[modelname,"propackconc","start",time.time()]]
 			startSys(s)
