@@ -13,7 +13,7 @@ class traceShape(LoadTestShape):
     traceFile = None
     data = None
     
-    def __init__(self,mod=400, shift=10, duration=600,traceFile="trace.mat"):
+    def __init__(self,mod=400, shift=10, duration=600,traceFile="twitter_20210101_730-24_freq120sec.mat"):
         super().__init__()
         self.mod = mod
         self.shift =  shift
