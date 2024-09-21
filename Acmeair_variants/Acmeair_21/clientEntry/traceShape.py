@@ -20,7 +20,7 @@ class traceShape(LoadTestShape):
         self.duration = duration
         self.traceFile=traceFile
         #load trace data (for now in matlab format but in general I have to use a csv)
-        self.data=loadmat(f"{self.traceFile}")["users"][0]
+        self.data=loadmat(f"{self.traceFile}")["tweets"][0]
         self.maxIndex = len(self.data)
         #rescale the trace
         mx = max(self.data)
@@ -30,7 +30,7 @@ class traceShape(LoadTestShape):
     def tick(self):
         run_time = self.get_run_time()
         if run_time <= self.duration:
-            if(int(run_time) % 60==0):
+            if(int(run_time) % 30==0):
                 self.users=(self.f(int(run_time)), 1)
             return self.users 
         return None
