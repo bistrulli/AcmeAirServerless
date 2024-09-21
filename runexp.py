@@ -23,18 +23,46 @@ def runExp():
 		exp=[]
 
 	sys=getSystems()
+
+	doDef=True
+	doNoconc=True
+	doWless=True
+	doPropacl=True
 	for s in sys:
-		# if(Path(s).name=="Acmeair_1"):
-		# 	print(f"analyzing {Path(s).name}")
-		# else:
-		# 	continue
-		
-		deploySys(s)
 
 		modelname=f"./{Path(s).name}"
 		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="defconc")].shape[0]>0):
 			print(f"{modelname} defconc analized")
+			doDef=False
 		else:
+			doDef=True
+
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
+			print(f"{modelname} defconc analized")
+			doNoconc=False
+		else:
+			doNoconc=True
+
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
+			print(f"{modelname} defconc analized")
+			doWless=False
+		else:
+			doWless=True
+
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
+			print(f"{modelname} defconc analized")
+			doPropacl=False
+		else:
+			doPropacl=True
+
+		if(doDef or doNoconc or doWless or doPropacl):
+			deploySys(s)
+		else:
+			print(f"Skikkinp {modelname}")
+			continue
+
+
+		if(doDef):
 			setDefConc(s)
 			exp+=[[modelname,"defconc","start",time.time()]]
 			startSys(s)
@@ -46,9 +74,7 @@ def runExp():
 			
 			time.sleep(120)
 
-		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
-			print(f"{modelname} noconc analized")
-		else:
+		if(doNoconc):
 			setNoConc(s)
 			exp+=[[modelname,"noconc","start",time.time()]]
 			startSys(s)
@@ -60,9 +86,7 @@ def runExp():
 			
 			time.sleep(120)
 
-		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
-			print(f"{modelname} wlessconc analized")
-		else:
+		if(doWless):
 			setWlessConc(s)
 			exp+=[[modelname,"wlessconc","start",time.time()]]
 			startSys(s)
@@ -74,9 +98,7 @@ def runExp():
 			
 			time.sleep(120)
 
-		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
-			print(f"{modelname} propackconc analized")
-		else:
+		if(doPropacl)
 			setProPackConc(s)
 			exp+=[[modelname,"propackconc","start",time.time()]]
 			startSys(s)
