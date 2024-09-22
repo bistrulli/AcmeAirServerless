@@ -23,58 +23,93 @@ def runExp():
 		exp=[]
 
 	sys=getSystems()
+
+	doDef=True
+	doNoconc=True
+	doWless=True
+	doPropacl=True
 	for s in sys:
-		# if(Path(s).name=="Acmeair_1"):
-		# 	print(f"analyzing {Path(s).name}")
-		# else:
-		# 	continue
-		
-		deploySys(s)
 
 		modelname=f"./{Path(s).name}"
-		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="defconc")].shape[0]>0):
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="defconc")].shape[0]>0):
 			print(f"{modelname} defconc analized")
+			doDef=False
 		else:
+			doDef=True
+
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
+			print(f"{modelname} defconc analized")
+			doNoconc=False
+		else:
+			doNoconc=True
+
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
+			print(f"{modelname} defconc analized")
+			doWless=False
+		else:
+			doWless=True
+
+		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
+			print(f"{modelname} defconc analized")
+			doPropacl=False
+		else:
+			doPropacl=True
+
+		if(doDef or doNoconc or doWless or doPropacl):
+			deploySys(s)
+		else:
+			print(f"Skikkinp {modelname}")
+			continue
+
+
+		if(doDef):
 			setDefConc(s)
 			exp+=[[modelname,"defconc","start",time.time()]]
 			startSys(s)
 			exp+=[[modelname,"defconc","end",time.time()]]
 			moveClientRt(s,"defconcrt")
+			
+			df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
+			df.to_csv("./results/experiments.csv", index=False)
+			
 			time.sleep(120)
 
-		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
-			print(f"{modelname} noconc analized")
-		else:
+		if(doNoconc):
 			setNoConc(s)
 			exp+=[[modelname,"noconc","start",time.time()]]
 			startSys(s)
 			exp+=[[modelname,"noconc","end",time.time()]]
 			moveClientRt(s,"noconcrt")
+
+			df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
+			df.to_csv("./results/experiments.csv", index=False)
+			
 			time.sleep(120)
 
-		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
-			print(f"{modelname} wlessconc analized")
-		else:
+		if(doWless):
 			setWlessConc(s)
 			exp+=[[modelname,"wlessconc","start",time.time()]]
 			startSys(s)
 			exp+=[[modelname,"wlessend","end",time.time()]]
 			moveClientRt(s,"wlessrt")
+
+			df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
+			df.to_csv("./results/experiments.csv", index=False)
+			
 			time.sleep(120)
 
-		if(dfexp.shape[0]>0 and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
-			print(f"{modelname} propackconc analized")
-		else:
+		if(doPropacl):
 			setProPackConc(s)
 			exp+=[[modelname,"propackconc","start",time.time()]]
 			startSys(s)
 			exp+=[[modelname,"propackconc","end",time.time()]]
 			moveClientRt(s,"propackrt")
-			time.sleep(120)
-			print("should run ProPack")
 
-		df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
-		df.to_csv("./results/experiments.csv", index=False)
+			df = pd.DataFrame(exp, columns=["modelname","exptype","action","time"])
+			df.to_csv("./results/experiments.csv", index=False)
+
+			time.sleep(120)
+			
 
 def getOptNT(sys):
 	print(f"getOptNT {sys}")
