@@ -20,6 +20,7 @@ from pathlib import Path
 from pygnuplot import gnuplot as gp
 from scipy.io import savemat
 from pathlib import Path
+from tqdm import tqdm
 import re
 
 def main(resDir=None):
@@ -33,43 +34,53 @@ def main(resDir=None):
     defbill=[]
     noconcbill=[]
     wlessbill=[]
+    propackbill=[]
 
     defconcRt95=[]
     noconcRt95=[]
     wlessRt95=[]
+    propackRT95=[]
 
     defconcRt70=[]
     noconcRt70=[]
     wlessRt70=[]
+    propackRT70=[]
 
     defconcRtAvg=[]
     noconcRtAvg=[]
     wlessRtAvg=[]
+    propackRTAvg=[]
 
     allOptCon=[]
+    allPropackCon=[]
 
     models=list(set(expdf["modelname"].to_numpy()))
-    for m in sorted(models):
+    for m in tqdm(sorted(models)):
         midx=re.findall(r"[0-9]+",m)[0]
         clientEntryPath=resDir.parent.joinpath("Acmeair_variants")/Path(m).joinpath("clientEntry")
         lqnModelPath=resDir.parent.joinpath("Acmeair_variants")/Path(m).joinpath(f"lqnmodel_{midx}.lqn").joinpath("optSol.csv")
+        propackSolPath=resDir.parent.joinpath("Acmeair_variants")/Path(m).joinpath(f"lqnmodel_{midx}.lqn").joinpath("ProPackSol.csv")
 
         optCon=pd.read_csv(lqnModelPath)
+        propackOpt=pd.read_csv(propackSolPath)
         allOptCon+=[optCon[["ncopt","ntopt"]].to_numpy()]
+        allPropackCon+=[propackOpt[["ncopt"]].to_numpy()]
 
         defconcRt95+=[np.percentile(np.loadtxt(clientEntryPath.joinpath("defconcrt.txt")),95)]
         noconcRt95+=[np.percentile(np.loadtxt(clientEntryPath.joinpath("noconcrt.txt")),95)]
         wlessRt95+=[np.percentile(np.loadtxt(clientEntryPath.joinpath("wlessrt.txt")),95)]
+        propackRT95+=[np.percentile(np.loadtxt(clientEntryPath.joinpath("propackrt.txt")),95)]
 
         defconcRt70+=[np.percentile(np.loadtxt(clientEntryPath.joinpath("defconcrt.txt")),70)]
         noconcRt70+=[np.percentile(np.loadtxt(clientEntryPath.joinpath("noconcrt.txt")),70)]
         wlessRt70+=[np.percentile(np.loadtxt(clientEntryPath.joinpath("wlessrt.txt")),70)]
+        propackRT70+=[np.percentile(np.loadtxt(clientEntryPath.joinpath("propackrt.txt")),70)]
 
         defconcRtAvg+=[np.mean(np.loadtxt(clientEntryPath.joinpath("defconcrt.txt")))]
         noconcRtAvg+=[np.mean(np.loadtxt(clientEntryPath.joinpath("noconcrt.txt")))]
         wlessRtAvg+=[np.mean(np.loadtxt(clientEntryPath.joinpath("wlessrt.txt")))]
+        propackRTAvg+=[np.mean(np.loadtxt(clientEntryPath.joinpath("propackrt.txt")))]
 
-        
 
         #get billable instance
         defcond_start=expdf[(expdf["modelname"]==m) & (expdf["exptype"]=="defconc") & (expdf["action"]=="start")]["time"].iloc[0]
@@ -78,6 +89,8 @@ def main(resDir=None):
         nocon_end=expdf[(expdf["modelname"]==m) & (expdf["exptype"]=="noconc") & (expdf["action"]=="end")]["time"].iloc[0]
         wlesscon_start=expdf[(expdf["modelname"]==m) & (expdf["exptype"]=="wlessconc") & (expdf["action"]=="start")]["time"].iloc[0]
         wlesscon_end=expdf[(expdf["modelname"]==m) & (expdf["exptype"]=="wlessend") & (expdf["action"]=="end")]["time"].iloc[0]
+        propackcon_start=expdf[(expdf["modelname"]==m) & (expdf["exptype"]=="propackconc") & (expdf["action"]=="start")]["time"].iloc[0]
+        propackcon_end=expdf[(expdf["modelname"]==m) & (expdf["exptype"]=="propackconc") & (expdf["action"]=="end")]["time"].iloc[0]
 
 
         defcond_start_date=datetime.fromtimestamp(defcond_start, tz=utc)-timedelta(days=0, hours=0, minutes=0)
@@ -89,30 +102,44 @@ def main(resDir=None):
         wlesscon_start_date=datetime.fromtimestamp(wlesscon_start, tz=utc)-timedelta(days=0, hours=0, minutes=0)
         wlesscon_end_date=datetime.fromtimestamp(wlesscon_end, tz=utc)+timedelta(days=0, hours=0, minutes=2)
 
+        propack_start_date=datetime.fromtimestamp(propackcon_start, tz=utc)-timedelta(days=0, hours=0, minutes=0)
+        propack_end_date=datetime.fromtimestamp(propackcon_end, tz=utc)+timedelta(days=0, hours=0, minutes=2)
+
+
         defbill+=[np.trapz(df_bill[(df_bill["time"]>=defcond_start_date) & (df_bill["time"]<=defcond_end_date)]["values"].to_numpy())]
         noconcbill+=[np.trapz(df_bill[(df_bill["time"]>=nocon_start_date) & (df_bill["time"]<=nocon_end_date)]["values"].to_numpy())]
         wlessbill+=[np.trapz(df_bill[(df_bill["time"]>=wlesscon_start_date) & (df_bill["time"]<=wlesscon_end_date)]["values"].to_numpy())]
+        propackbill+=[np.trapz(df_bill[(df_bill["time"]>=propack_start_date) & (df_bill["time"]<=propack_end_date)]["values"].to_numpy())]
 
     defconcRt95=np.array(defconcRt95)
     noconcRt95=np.array(noconcRt95)
     wlessRt95=np.array(wlessRt95)
+    propackRT95=np.array(propackRT95)
 
     defconcRt70=np.array(defconcRt70)
     noconcRt70=np.array(noconcRt70)
     wlessRt70=np.array(wlessRt70)
+    propackRT70=np.array(propackRT70)
 
     defconcRtAvg=np.array(defconcRtAvg)
     noconcRtAvg=np.array(noconcRtAvg)
     wlessRtAvg=np.array(wlessRtAvg)
+    propackRTAvg=np.array(propackRTAvg)
 
     defbill=np.array(defbill)
     noconcbill=np.array(noconcbill)
     wlessbill=np.array(wlessbill)
+    propackbill=np.array(propackbill)
 
-    savemat(resDir/Path("wless.mat"),{"defconcRt95":defconcRt95,"noconcRt95":noconcRt95,"wlessRt95":wlessRt95,
-                         "defconcRt70":defconcRt70,"noconcRt70":noconcRt70,"wlessRt70":wlessRt70,
-                         "defconcRtAvg":defconcRtAvg,"noconcRtAvg":noconcRtAvg,"wlessRtAvg":wlessRtAvg,
-                        "defbill":defbill,"noconcbill":noconcbill,"wlessbill":wlessbill,"optCon":allOptCon})
+    savemat(resDir/Path("wless.mat"),{"defconcRt95":defconcRt95,"noconcRt95":noconcRt95,
+        "wlessRt95":wlessRt95,"propackRt95":propackRT95,
+        "defconcRt70":defconcRt70,"noconcRt70":noconcRt70,
+        "wlessRt70":wlessRt70,"propackRt70":propackRT70,
+        "defconcRtAvg":defconcRtAvg,"noconcRtAvg":noconcRtAvg,
+        "wlessRtAvg":wlessRtAvg,"propackRtAvg":propackRTAvg,
+        "defbill":defbill,"noconcbill":noconcbill,
+        "wlessbill":wlessbill,"propackbill":propackbill,
+        "optCon":allOptCon,"propackCon":allPropackCon})
 
 if __name__ == '__main__':
     main(Path(__file__).parent.joinpath("results/"))

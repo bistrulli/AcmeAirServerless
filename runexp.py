@@ -38,19 +38,19 @@ def runExp():
 			doDef=True
 
 		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="noconc")].shape[0]>0):
-			print(f"{modelname} defconc analized")
+			print(f"{modelname} noconc analized")
 			doNoconc=False
 		else:
 			doNoconc=True
 
 		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="wlessconc")].shape[0]>0):
-			print(f"{modelname} defconc analized")
+			print(f"{modelname} wlessconc analized")
 			doWless=False
 		else:
 			doWless=True
 
 		if(dfexp is not None and dfexp[(dfexp["modelname"]==modelname) & (dfexp["exptype"]=="propackconc")].shape[0]>0):
-			print(f"{modelname} defconc analized")
+			print(f"{modelname} propackconc analized")
 			doPropacl=False
 		else:
 			doPropacl=True
