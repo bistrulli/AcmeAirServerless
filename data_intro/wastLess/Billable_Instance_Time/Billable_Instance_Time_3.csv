@@ -1,0 +1,22 @@
+TimeSeries ID,container/billable_instance_time.cloud_run_revision.ALIGN_RATE.REDUCE_SUM.metric.type="run.googleapis.com/container/billable_instance_time" resource.type="cloud_run_revision" resource.label."location"="northamerica-northeast1" resource.label."project_id"="modellearning" resource.label."service_name"="fun3".60s.project_id:modellearning.service_name:fun3
+project_id,modellearning
+service_name,fun3
+Fri Nov 17 2023 17:29:00 GMT+0100 (Ora standard dell’Europa centrale),1.2262058997837397
+Fri Nov 17 2023 17:30:00 GMT+0100 (Ora standard dell’Europa centrale),1.3240399997786267
+Fri Nov 17 2023 17:31:00 GMT+0100 (Ora standard dell’Europa centrale),1.0008903079666664
+Fri Nov 17 2023 17:32:00 GMT+0100 (Ora standard dell’Europa centrale),1.0031208864833336
+Fri Nov 17 2023 17:33:00 GMT+0100 (Ora standard dell’Europa centrale),1.0636636560666668
+Fri Nov 17 2023 17:34:00 GMT+0100 (Ora standard dell’Europa centrale),1.9366666666666665
+Fri Nov 17 2023 17:35:00 GMT+0100 (Ora standard dell’Europa centrale),2.8866666666666663
+Fri Nov 17 2023 17:36:00 GMT+0100 (Ora standard dell’Europa centrale),3.6549999999999994
+Fri Nov 17 2023 17:37:00 GMT+0100 (Ora standard dell’Europa centrale),4.391666666666667
+Fri Nov 17 2023 17:38:00 GMT+0100 (Ora standard dell’Europa centrale),4.236666666666667
+Fri Nov 17 2023 17:39:00 GMT+0100 (Ora standard dell’Europa centrale),4.321666666666666
+Fri Nov 17 2023 17:40:00 GMT+0100 (Ora standard dell’Europa centrale),4.021666666666666
+Fri Nov 17 2023 17:41:00 GMT+0100 (Ora standard dell’Europa centrale),3.8700000000000006
+Fri Nov 17 2023 17:42:00 GMT+0100 (Ora standard dell’Europa centrale),2.748392261350004
+Fri Nov 17 2023 17:43:00 GMT+0100 (Ora standard dell’Europa centrale),1.029821028516661
+Fri Nov 17 2023 17:44:00 GMT+0100 (Ora standard dell’Europa centrale),1.0429190310666703
+Fri Nov 17 2023 17:45:00 GMT+0100 (Ora standard dell’Europa centrale),1.002322340349997
+Fri Nov 17 2023 17:46:00 GMT+0100 (Ora standard dell’Europa centrale),1.0005077268333329
+Fri Nov 17 2023 17:47:00 GMT+0100 (Ora standard dell’Europa centrale),1.0597757323833397

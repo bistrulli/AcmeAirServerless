@@ -1,0 +1,22 @@
+TimeSeries ID,container/max_request_concurrencies.cloud_run_revision.ALIGN_DELTA.REDUCE_MEAN.metric.type="run.googleapis.com/container/max_request_concurrencies" resource.type="cloud_run_revision" resource.label."location"="northamerica-northeast1" resource.label."project_id"="modellearning" resource.label."service_name"="fun3".60s.project_id:modellearning.service_name:fun3
+project_id,modellearning
+service_name,fun3
+Fri Nov 17 2023 17:29:00 GMT+0100 (Ora standard dell’Europa centrale),0.5
+Fri Nov 17 2023 17:30:00 GMT+0100 (Ora standard dell’Europa centrale),0
+Fri Nov 17 2023 17:31:00 GMT+0100 (Ora standard dell’Europa centrale),0
+Fri Nov 17 2023 17:32:00 GMT+0100 (Ora standard dell’Europa centrale),3.9382563147589518
+Fri Nov 17 2023 17:33:00 GMT+0100 (Ora standard dell’Europa centrale),4.499999999999999
+Fri Nov 17 2023 17:34:00 GMT+0100 (Ora standard dell’Europa centrale),4.592681141361974
+Fri Nov 17 2023 17:35:00 GMT+0100 (Ora standard dell’Europa centrale),4.9721637930051275
+Fri Nov 17 2023 17:36:00 GMT+0100 (Ora standard dell’Europa centrale),5.28571428571428
+Fri Nov 17 2023 17:37:00 GMT+0100 (Ora standard dell’Europa centrale),5.653238215604235
+Fri Nov 17 2023 17:38:00 GMT+0100 (Ora standard dell’Europa centrale),5.285714285714286
+Fri Nov 17 2023 17:39:00 GMT+0100 (Ora standard dell’Europa centrale),5.367785553420751
+Fri Nov 17 2023 17:40:00 GMT+0100 (Ora standard dell’Europa centrale),4.671557642338397
+Fri Nov 17 2023 17:41:00 GMT+0100 (Ora standard dell’Europa centrale),3.5898428403588767
+Fri Nov 17 2023 17:42:00 GMT+0100 (Ora standard dell’Europa centrale),2.1207680477383017
+Fri Nov 17 2023 17:43:00 GMT+0100 (Ora standard dell’Europa centrale),1.1204594563059314
+Fri Nov 17 2023 17:44:00 GMT+0100 (Ora standard dell’Europa centrale),0.166666666666671
+Fri Nov 17 2023 17:45:00 GMT+0100 (Ora standard dell’Europa centrale),0
+Fri Nov 17 2023 17:46:00 GMT+0100 (Ora standard dell’Europa centrale),0
+Fri Nov 17 2023 17:47:00 GMT+0100 (Ora standard dell’Europa centrale),0.16666666666665797

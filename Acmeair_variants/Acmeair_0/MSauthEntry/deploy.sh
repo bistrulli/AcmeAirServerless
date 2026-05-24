@@ -8,7 +8,7 @@ gcloud beta functions deploy msauthentry \
 --memory=1024MB \
 --cpu=1 \
 --trigger-http \
---allow-unauthenticated \
---project my-microservice-test-project \
+#--allow-unauthenticated \
+--project syda-autopilot \
 --max-instances=100 \
 --min-instances=1

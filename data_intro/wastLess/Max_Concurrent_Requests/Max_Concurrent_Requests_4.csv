@@ -1,0 +1,22 @@
+TimeSeries ID,container/max_request_concurrencies.cloud_run_revision.ALIGN_DELTA.REDUCE_MEAN.metric.type="run.googleapis.com/container/max_request_concurrencies" resource.type="cloud_run_revision" resource.label."location"="northamerica-northeast1" resource.label."project_id"="modellearning" resource.label."service_name"="fun4".60s.project_id:modellearning.service_name:fun4
+service_name,fun4
+project_id,modellearning
+Fri Nov 17 2023 17:29:00 GMT+0100 (Ora standard dell’Europa centrale),0
+Fri Nov 17 2023 17:30:00 GMT+0100 (Ora standard dell’Europa centrale),1
+Fri Nov 17 2023 17:31:00 GMT+0100 (Ora standard dell’Europa centrale),0.8333333333333334
+Fri Nov 17 2023 17:32:00 GMT+0100 (Ora standard dell’Europa centrale),1.449982364347574
+Fri Nov 17 2023 17:33:00 GMT+0100 (Ora standard dell’Europa centrale),1.7845470448432383
+Fri Nov 17 2023 17:34:00 GMT+0100 (Ora standard dell’Europa centrale),1.9306708753861042
+Fri Nov 17 2023 17:35:00 GMT+0100 (Ora standard dell’Europa centrale),1.8596282366852122
+Fri Nov 17 2023 17:36:00 GMT+0100 (Ora standard dell’Europa centrale),1.7687147275321016
+Fri Nov 17 2023 17:37:00 GMT+0100 (Ora standard dell’Europa centrale),1.6399430724244906
+Fri Nov 17 2023 17:38:00 GMT+0100 (Ora standard dell’Europa centrale),1.544042027473784
+Fri Nov 17 2023 17:39:00 GMT+0100 (Ora standard dell’Europa centrale),1.4995093860562005
+Fri Nov 17 2023 17:40:00 GMT+0100 (Ora standard dell’Europa centrale),1.2243673362309564
+Fri Nov 17 2023 17:41:00 GMT+0100 (Ora standard dell’Europa centrale),1.0671727040930141
+Fri Nov 17 2023 17:42:00 GMT+0100 (Ora standard dell’Europa centrale),0.7785948062809518
+Fri Nov 17 2023 17:43:00 GMT+0100 (Ora standard dell’Europa centrale),0.1724137931034483
+Fri Nov 17 2023 17:44:00 GMT+0100 (Ora standard dell’Europa centrale),0
+Fri Nov 17 2023 17:45:00 GMT+0100 (Ora standard dell’Europa centrale),0.04347826086956398
+Fri Nov 17 2023 17:46:00 GMT+0100 (Ora standard dell’Europa centrale),0.05000000000000142
+Fri Nov 17 2023 17:47:00 GMT+0100 (Ora standard dell’Europa centrale),0.05263157894736842

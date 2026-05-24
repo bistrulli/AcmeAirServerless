@@ -1,0 +1,17 @@
+TimeSeries ID,request_count.cloud_run_revision.ALIGN_RATE.REDUCE_SUM.metric.type="run.googleapis.com/request_count" resource.type="cloud_run_revision" resource.label."service_name"="fun1".60s.project_id:modellearning
+project_id,modellearning
+Fri Nov 17 2023 15:27:00 GMT+0100 (Ora standard dell’Europa centrale),0
+Fri Nov 17 2023 15:28:00 GMT+0100 (Ora standard dell’Europa centrale),0.38333333333333336
+Fri Nov 17 2023 15:29:00 GMT+0100 (Ora standard dell’Europa centrale),1.3833333333333333
+Fri Nov 17 2023 15:30:00 GMT+0100 (Ora standard dell’Europa centrale),2.25
+Fri Nov 17 2023 15:31:00 GMT+0100 (Ora standard dell’Europa centrale),2.7
+Fri Nov 17 2023 15:32:00 GMT+0100 (Ora standard dell’Europa centrale),3.1666666666666665
+Fri Nov 17 2023 15:33:00 GMT+0100 (Ora standard dell’Europa centrale),4.433333333333334
+Fri Nov 17 2023 15:34:00 GMT+0100 (Ora standard dell’Europa centrale),6.033333333333333
+Fri Nov 17 2023 15:35:00 GMT+0100 (Ora standard dell’Europa centrale),6.45
+Fri Nov 17 2023 15:36:00 GMT+0100 (Ora standard dell’Europa centrale),6.883333333333334
+Fri Nov 17 2023 15:37:00 GMT+0100 (Ora standard dell’Europa centrale),7.733333333333333
+Fri Nov 17 2023 15:38:00 GMT+0100 (Ora standard dell’Europa centrale),2.783333333333333
+Fri Nov 17 2023 15:39:00 GMT+0100 (Ora standard dell’Europa centrale),0.45
+Fri Nov 17 2023 15:40:00 GMT+0100 (Ora standard dell’Europa centrale),0
+Fri Nov 17 2023 15:41:00 GMT+0100 (Ora standard dell’Europa centrale),0
