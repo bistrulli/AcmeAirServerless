@@ -208,3 +208,10 @@ cython_debug/
 **/.DS_Store
 **/._.DS_Store
 
+
+# Claude Code agentic pipeline — runtime artifacts (keep .claude/ tracked)
+plan/
+results/orchestrate_*/
+results/bench_*/
+docs/research-notes/
+.remember/

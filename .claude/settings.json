@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(tree:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(git stash:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(pip list:*)",
+      "Bash(pip show:*)",
+      "Bash(pytest:*)",
+      "Bash(mvn:*)",
+      "Bash(java:*)",
+      "Bash(javac:*)",
+      "Bash(jar:*)",
+      "Bash(matlab -batch:*)",
+      "Bash(octave --no-gui:*)",
+      "Bash(locust:*)",
+      "Bash(curl https://api.semanticscholar.org/*)",
+      "Bash(curl https://arxiv.org/*)",
+      "Bash(curl https://export.arxiv.org/*)",
+      "Bash(curl https://raw.githubusercontent.com/spcl/serverless-benchmarks/*)",
+      "Bash(curl https://api.github.com/repos/spcl/serverless-benchmarks/*)",
+      "Bash(md5:*)",
+      "Bash(shasum:*)",
+      "Bash(sha256sum:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(diff:*)",
+      "Bash(jq:*)",
+      "Bash(lsof:*)",
+      "Bash(nc -z:*)",
+      "Bash(gh issue:*)",
+      "Bash(gh label:*)",
+      "Bash(gh search:*)",
+      "Bash(gh auth status)",
+      "Bash(gh repo view:*)",
+      "Bash(codex --help)",
+      "Bash(codex exec:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(git push --force:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean -f:*)",
+      "Bash(git branch -D:*)",
+      "Bash(gcloud:*)",
+      "Bash(aws:*)",
+      "Bash(az:*)",
+      "Bash(kubectl:*)",
+      "Bash(helm:*)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'REMINDER: Wless agentic pipeline active. Local-only execution (no gcloud/aws/az). For multi-file tasks (>3 files) prefer /plan over direct edits. For maven/serverless changes run /audit-deploy first. For plot regen run /audit-data then /replot. For SPCL sb work use /sb-adapt.'"
+          }
+        ]
+      }
+    ]
+  }
+}
